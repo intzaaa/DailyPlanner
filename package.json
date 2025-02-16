@@ -1,0 +1,22 @@
+{
+  "name": "daily_planner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build src/index.ts -a -m -o ./dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "dependencies": {
+    "@vercel/ncc": "^0.38.3",
+    "ical.js": "^2.1.0",
+    "openai": "^4.85.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  }
+}
