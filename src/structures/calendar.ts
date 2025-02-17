@@ -4,18 +4,15 @@ export type RecurrenceBase = {
   interval?: number;
 };
 
-export type Recurrence = RecurrenceBase & (
-  | { frequency: "DAILY" }
-  | { frequency: "WEEKLY" | "MONTHLY" | "YEARLY"; by_day: string[] }
-);
+export type Recurrence = RecurrenceBase & ({ frequency: "DAILY" } | { frequency: "WEEKLY" | "MONTHLY" | "YEARLY"; by_day: string[] });
 
 export type CalendarEvent = {
   summary: string;
-  description?: string;
+  description: string | undefined;
   start_time: string;
   end_time: string;
-  recurrence?: Recurrence;
-  location?: string;
+  recurrence: Recurrence | undefined;
+  location: string | undefined;
 };
 
 export type Calendar = {
