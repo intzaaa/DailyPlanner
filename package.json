@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "ncc build ./src/index.ts -a -m -o ./dist",
+    "index": "tsx ./src/index.ts",
     "test": "tsx ./src/test.ts"
   },
   "keywords": [],
