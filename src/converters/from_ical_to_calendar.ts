@@ -6,6 +6,8 @@ export const from_ical_to_calendar = (ical: string): Calendar => {
 
   const name = component.getFirstPropertyValue("x-wr-calname")?.toString() ?? "Untitled Calendar";
 
+  const description = component.getFirstPropertyValue("x-wr-caldesc")?.toString() ?? undefined;
+
   const timezone =
     component.getFirstSubcomponent("vtimezone")?.getFirstPropertyValue("tzid")?.toString() ??
     component.getFirstPropertyValue("x-wr-timezone")?.toString() ??
@@ -36,8 +38,9 @@ export const from_ical_to_calendar = (ical: string): Calendar => {
   });
 
   return {
-    name: name,
-    timezone: timezone,
-    events: events,
+    name,
+    description,
+    timezone,
+    events,
   } as const;
 };

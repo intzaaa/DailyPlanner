@@ -1,6 +1,6 @@
 export type Recurrence = {
   frequency: "DAILY" | "WEEKLY" | "MONTHLY" | "YEARLY";
-  interval?: number;
+  interval: number | undefined;
   count: number | undefined;
   until: string | undefined;
   byDay: string[] | undefined;
@@ -19,7 +19,7 @@ export type CalendarEvent = {
 
 export type Calendar = {
   name: string;
-  description?: string;
+  description: string | undefined;
   timezone: string;
   events: CalendarEvent[];
 };

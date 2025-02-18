@@ -3,6 +3,7 @@
     "BYDAY",
     "BYMONTH",
     "BYMONTHDAY",
+    "caldesc",
     "calname",
     "ical",
     "jcal",
