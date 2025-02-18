@@ -1,3 +1,11 @@
-import converter_test from "./converters/test";
-
-converter_test();
+export default await Promise.all(
+  (
+    await Promise.all(
+      await Promise.all(
+        //
+        [import("./converters/test")]
+        //
+      )
+    )
+  ).map((item) => item.default())
+);

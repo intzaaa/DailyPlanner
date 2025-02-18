@@ -1,10 +1,6 @@
 import ical_js from "ical.js";
 import { Calendar, CalendarEvent } from "../structures/calendar";
 
-import timezone from "dayjs/plugin/timezone";
-import dayjs from "dayjs";
-dayjs.extend(timezone);
-
 export const from_ical_to_calendar = (ical: string): Calendar => {
   const component = new ical_js.Component(ical_js.parse(ical));
 
@@ -36,12 +32,12 @@ export const from_ical_to_calendar = (ical: string): Calendar => {
             byMonth: rrule.parts.BYMONTH,
           }
         : undefined,
-    } satisfies CalendarEvent;
+    };
   });
 
   return {
     name: name,
     timezone: timezone,
     events: events,
-  };
+  } as const;
 };

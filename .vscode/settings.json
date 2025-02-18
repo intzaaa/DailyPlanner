@@ -1,3 +1,17 @@
 {
-  "cSpell.words": ["BYDAY", "BYMONTH", "BYMONTHDAY", "calname", "ical", "jcal", "rrule", "Subcomponents", "vcalendar", "vevent", "vevents"]
+  "cSpell.words": [
+    "BYDAY",
+    "BYMONTH",
+    "BYMONTHDAY",
+    "calname",
+    "ical",
+    "jcal",
+    "rrule",
+    "Subcomponent",
+    "Subcomponents",
+    "vcalendar",
+    "vevent",
+    "vevents",
+    "vtimezone"
+  ]
 }
