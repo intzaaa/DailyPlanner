@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "ncc build src/index.ts -a -m -o ./dist"
+    "build": "ncc build ./src/index.ts -a -m -o ./dist",
+    "test": "tsx ./src/test.ts"
   },
   "keywords": [],
   "author": "",
@@ -12,11 +13,13 @@
   "type": "module",
   "dependencies": {
     "@vercel/ncc": "^0.38.3",
+    "dayjs": "^1.11.13",
     "ical.js": "^2.1.0",
     "openai": "^4.85.0"
   },
   "devDependencies": {
     "@types/node": "^22.13.4",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   }
 }

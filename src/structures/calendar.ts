@@ -1,10 +1,12 @@
-export type RecurrenceBase = {
-  count?: number;
-  until?: string;
+export type Recurrence = {
+  frequency: "DAILY" | "WEEKLY" | "MONTHLY" | "YEARLY";
   interval?: number;
+  count: number | undefined;
+  until: string | undefined;
+  byDay: string[] | undefined;
+  byMonthDay: number[] | undefined;
+  byMonth: number[] | undefined;
 };
-
-export type Recurrence = RecurrenceBase & ({ frequency: "DAILY" } | { frequency: "WEEKLY" | "MONTHLY" | "YEARLY"; by_day: string[] });
 
 export type CalendarEvent = {
   summary: string;

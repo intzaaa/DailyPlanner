@@ -1,3 +1,6 @@
-export const n = (strings: TemplateStringsArray, ...values: any[]): string | undefined =>
-  values.some((v) => v == null) ? undefined : String.raw({ raw: strings }, ...values);
-export const e = (strings: TemplateStringsArray, ...values: any[]): string => (values.some((v) => v == null) ? "" : String.raw({ raw: strings }, ...values));
+export const base =
+  <F>(fallback: F) =>
+  (strings: TemplateStringsArray, ...values: any[]): string | F =>
+    values.some((v) => v == null) ? fallback : String.raw({ raw: strings }, ...values);
+export const n = base(undefined);
+export const e = base("" as const);
