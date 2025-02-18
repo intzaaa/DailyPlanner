@@ -17,12 +17,12 @@ export const from_calendar_to_param = (schedule: PlannerCalendar): LLM.Chat.Comp
       schedule.events
         .map(
           (event, idx) =>
-            `    ${idx + 1}. ${event.summary}:\n` +
-            `        Start: ${event.start_time}\n` +
-            `        End: ${event.end_time}\n` +
-            e`        Description: ${event.description}\n` +
-            e`        Recurrence: ${event.recurrence?.frequency}\n` +
-            e`        Location: ${event.location}\n`
+            `    ${idx + 1}. ${event.summary}:` +
+            `        Start: ${event.start_time}` +
+            `        End: ${event.end_time}` +
+            e`        Description: ${event.description}` +
+            e`        Recurrence: ${event.recurrence?.frequency}` +
+            e`        Location: ${event.location}`
         )
         .join("\n") +
       "\n",

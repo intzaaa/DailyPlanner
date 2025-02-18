@@ -1,29 +1,14 @@
-export const deep_check = (
-  obj: object,
-  parents: string[] = []
-): {
-  true: string[];
-  false: string[];
-} => {
-  const true_paths: string[] = [];
-  const false_paths: string[] = [];
-
-  Object.entries(obj).forEach(([key, value]) => {
-    if (typeof value === "object") {
-      const sub = deep_check(value, [...parents, key]);
-      true_paths.push(...sub.true);
-      false_paths.push(...sub.false);
-    } else {
-      if (value === undefined || value === null) {
-        false_paths.push([...parents, key].join("."));
+export const deep_check = (obj: object, parents: string[] = []) =>
+  Object.entries(obj).reduce<{ true: string[]; false: string[] }>(
+    (acc, [key, value]) => {
+      if (typeof value === "object") {
+        const sub = deep_check(value, [...parents, key]);
+        acc.true.push(...sub.true);
+        acc.false.push(...sub.false);
       } else {
-        true_paths.push([...parents, key].join("."));
+        (value === undefined || value === null ? acc.false : acc.true).push([...parents, key].join("."));
       }
-    }
-  });
-
-  return {
-    true: true_paths,
-    false: false_paths,
-  };
-};
+      return acc;
+    },
+    { true: [], false: [] }
+  );

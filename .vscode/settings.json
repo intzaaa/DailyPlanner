@@ -6,6 +6,7 @@
     "caldesc",
     "calname",
     "ical",
+    "icalendar",
     "jcal",
     "rrule",
     "Subcomponent",

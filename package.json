@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "build": "ncc build ./src/index.ts -a -m -o ./dist",
-    "start": "tsx ./src/index.ts",
-    "test": "tsx ./src/test.ts"
+    "start": "node --import @swc-node/register/esm-register ./src/index.ts",
+    "test": "node --import @swc-node/register/esm-register ./src/test.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,12 +18,14 @@
   "dependencies": {
     "@vercel/ncc": "^0.38.3",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
     "ical.js": "^2.1.0",
-    "openai": "^4.85.0"
+    "openai": "^4.85.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@swc-node/register": "^1.10.9",
     "@types/node": "^22.13.4",
-    "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   }
 }

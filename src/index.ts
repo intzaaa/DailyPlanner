@@ -1,19 +1,21 @@
+import "dotenv/config";
 import { OpenAI as LLM } from "openai";
-import { from_calendar_to_param } from "./converters/from_calendar_to_param";
-import { from_ical_to_calendar } from "./converters/from_ical_to_calendar";
 import { deep_check } from "./utils/deep_check";
+import { execute_defaults } from "./utils/execute_defaults";
+
+export const dirname = import.meta.dirname;
 
 export const config = {
+  lang: process.env["DP_LANG"] ?? "zh",
   llm: {
-    base_url: process.env["DP_BASE_URL"]!,
+    base_url: process.env["DP_BASE_URL"] ?? "https://api.openai.com/v1",
     api_key: process.env["DP_API_KEY"]!,
-    model: process.env["DP_MODEL"]!,
+    model: process.env["DP_MODEL"]! ?? "gpt-4o-turbo",
   },
-  link: process.env["DP_LINK"]!,
+  subscription: process.env["DP_LINK"]!,
   info: {
     owner: process.env["DP_OWNER"]!,
     bio: process.env["DP_BIO"]!,
-    goals: process.env["DP_GOALS"]?.split(";")!,
   },
 } as const;
 
@@ -31,15 +33,4 @@ export const llm = new LLM({
   apiKey: config.llm.api_key,
 });
 
-const ical = await fetch(config.link).then((res) => res.text());
-
-const calendar = from_ical_to_calendar(ical);
-
-const param = from_calendar_to_param({ ...config.info, ...calendar });
-
-llm.chat.completions
-  .create({
-    model: config.llm.model,
-    messages: [param],
-  })
-  .then(console.log);
+execute_defaults(import("./functions/describe_icalendar"));

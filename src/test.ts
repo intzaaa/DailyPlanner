@@ -1,11 +1,3 @@
-export default await Promise.all(
-  (
-    await Promise.all(
-      await Promise.all(
-        //
-        [import("./converters/test")]
-        //
-      )
-    )
-  ).map((item) => item.default())
-);
+import { execute_defaults } from "./utils/execute_defaults";
+
+export default await execute_defaults(import("./converters/test"));
