@@ -7,7 +7,7 @@ const openai = new OpenAI({
 });
 
 async function extractCalendarParameters(icsContent: string): Promise<string> {
-    const prompt = `请从下面的ICS文件内容中提取日历参数，如事件名称、开始时间、结束时间、地点等，并以JSON格式返回：
+    const prompt = `Please extract calendar parameters from the following ICS file content, such as event name, start time, end time, location, etc., and return in JSON format:
     
 ${icsContent}`;
 
@@ -17,9 +17,9 @@ ${icsContent}`;
             messages: [{ role: 'user', content: prompt }],
             temperature: 0,
         });
-        return response.choices[0]?.message?.content || '未收到有效响应';
+        return response.choices[0]?.message?.content || 'No valid response received';
     } catch (error) {
-        console.error('LLM请求出错：', error);
+        console.error('LLM request error:', error);
         throw error;
     }
 }
@@ -30,9 +30,9 @@ async function main() {
         const icsContent = fs.readFileSync(icsFilePath, 'utf-8');
 
         const extractedParameters = await extractCalendarParameters(icsContent);
-        console.log('提取的日历参数：', extractedParameters);
+        console.log('Extracted calendar parameters:', extractedParameters);
     } catch (error) {
-        console.error('程序出错：', error);
+        console.error('Program error:', error);
     }
 }
 
