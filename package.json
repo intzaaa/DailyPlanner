@@ -1,17 +1,20 @@
 {
   "name": "daily_planner",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "ncc build ./src/index.ts -a -m -o ./dist",
-    "index": "tsx ./src/index.ts",
+    "start": "tsx ./src/index.ts",
     "test": "tsx ./src/test.ts"
   },
   "keywords": [],
   "author": "",
   "license": "AGPL-3.0-only",
   "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "packageManager": "pnpm@9.15.4",
   "dependencies": {
     "@vercel/ncc": "^0.38.3",
     "dayjs": "^1.11.13",
