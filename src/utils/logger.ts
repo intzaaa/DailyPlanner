@@ -1,14 +1,13 @@
-import { curry3 } from "@typed/curry";
 import ansis, { AnsiColors } from "ansis";
 
 export type LogLevel = "FATAL" | "ERROR" | "WARN" | "INFO" | "DEBUG" | "TRACE";
 
-export const logger = curry3((level: LogLevel, module: string, message: any) => {
+export const logger = (module: string, default_level: LogLevel) => (message: any, level?: LogLevel) => {
   const time = new Date().toISOString();
   console.log(
     ansis[
       ((): AnsiColors => {
-        switch (level) {
+        switch (level ?? default_level) {
           case "FATAL":
           case "ERROR":
             return "red";
@@ -24,4 +23,4 @@ export const logger = curry3((level: LogLevel, module: string, message: any) => 
       })()
     ](`[${level}] [${time}] [${module}] ${message}`)
   );
-});
+};

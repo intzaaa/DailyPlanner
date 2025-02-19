@@ -5,7 +5,7 @@ import { logger } from "../utils/logger";
 export default async () => {
   const { config, llm } = await import("..");
 
-  const log = logger(config.log_level, import.meta.filename);
+  const log = logger(import.meta.filename, config.log_level);
 
   const chats: typeof chat = (await import(`../chats/${config.lang}`)).default;
   const ical = await fetch_ical();

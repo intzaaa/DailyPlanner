@@ -21,14 +21,13 @@ export const config = {
   log_level: (process.env["DP_LOG_LEVEL"] ?? "info") as LogLevel,
 } as const;
 
-export const log = logger(config.log_level);
-const l = log(import.meta.filename);
+export const log = logger(import.meta.filename, config.log_level);
 
 {
   const check = deep_check(config);
 
   if (check.false.length) {
-    log("ERROR", `The following values are missing:\n${check.false.join(" ")}`);
+    log(`The following values are missing:\n${check.false.join(" ")}`, "ERROR");
     process.exit(1);
   }
 }
@@ -38,6 +37,6 @@ export const llm = new LLM({
   apiKey: config.llm.api_key,
 });
 
-l(`Successfully loaded configuration: ${JSON.stringify(config)}`);
+log(`Successfully loaded configuration: ${JSON.stringify(config)}`);
 
 execute_defaults(import("./functions/describe_icalendar"));
