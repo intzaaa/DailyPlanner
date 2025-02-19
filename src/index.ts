@@ -2,6 +2,7 @@ import "dotenv/config";
 import { OpenAI as LLM } from "openai";
 import { deep_check } from "./utils/deep_check";
 import { execute_defaults } from "./utils/execute_defaults";
+import { logger, LogLevel } from "./utils/logger";
 
 export const dirname = import.meta.dirname;
 
@@ -17,13 +18,17 @@ export const config = {
     owner: process.env["DP_OWNER"]!,
     bio: process.env["DP_BIO"]!,
   },
+  log_level: (process.env["DP_LOG_LEVEL"] ?? "info") as LogLevel,
 } as const;
+
+export const log = logger(config.log_level);
+const l = log(import.meta.filename);
 
 {
   const check = deep_check(config);
 
   if (check.false.length) {
-    console.error(`The following values are missing:\n${check.false.join(" ")}`);
+    log("ERROR", `The following values are missing:\n${check.false.join(" ")}`);
     process.exit(1);
   }
 }
@@ -32,5 +37,7 @@ export const llm = new LLM({
   baseURL: config.llm.base_url,
   apiKey: config.llm.api_key,
 });
+
+l(`Successfully loaded configuration: ${JSON.stringify(config)}`);
 
 execute_defaults(import("./functions/describe_icalendar"));

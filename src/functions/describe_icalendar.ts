@@ -1,8 +1,11 @@
 import type chat from "../chats/zh-CN";
 import { fetch_ical } from "../utils/fetch_ical";
+import { logger } from "../utils/logger";
 
 export default async () => {
   const { config, llm } = await import("..");
+
+  const log = logger(config.log_level, import.meta.filename);
 
   const chats: typeof chat = (await import(`../chats/${config.lang}`)).default;
   const ical = await fetch_ical();
@@ -17,5 +20,9 @@ export default async () => {
     ],
   });
 
-  return (await promise).choices[0]!.message.content!;
+  const result = (await promise).choices[0]!.message.content!;
+
+  log(result);
+
+  return result;
 };
