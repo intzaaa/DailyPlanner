@@ -1,14 +1,12 @@
 import { get_chat } from "../utils/get_chat.ts";
 import { logger } from "../utils/logger.ts";
 
-export default async () => {
+export default async (): Promise<string> => {
   const { config, llm } = await import("../index.ts");
-
   const l = await logger("assign_task");
-
   const chats = await get_chat();
 
-  const promise = llm.chat.completions.create({
+  const completion = await llm.chat.completions.create({
     model: config.llm.model,
     messages: [
       {
@@ -19,9 +17,7 @@ export default async () => {
     response_format: chats.assign_tasks.response,
   });
 
-  const result = (await promise).choices[0]!.message.content!;
-
+  const result = completion.choices[0]?.message.content;
   l("INFO", result);
-
-  return result;
+  return result ?? "";
 };
