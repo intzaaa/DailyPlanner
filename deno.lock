@@ -5,7 +5,7 @@
     "npm:@typed/curry@^1.0.1": "1.0.1",
     "npm:@types/node@^22.13.4": "22.13.4",
     "npm:@vercel/ncc@~0.38.3": "0.38.3",
-    "npm:ansis@^3.15.0": "3.15.0",
+    "npm:chalk@^5.4.1": "5.4.1",
     "npm:dayjs@^1.11.13": "1.11.13",
     "npm:dotenv@^16.4.7": "16.4.7",
     "npm:ical.js@^2.1.0": "2.1.0",
@@ -62,9 +62,6 @@
       "dependencies": [
         "humanize-ms"
       ]
-    },
-    "ansis@3.15.0": {
-      "integrity": "sha512-zIcWDJ+Kwqxfdnogx66Gxzr0kVmCcRAdat9nlY2IHsshqTN4fBH6tMeRMPA/2w0rpBayIJvjQAaa2/4RDrNqwg=="
     },
     "asynckit@0.4.0": {
       "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q=="
@@ -270,7 +267,7 @@
         "npm:@typed/curry@^1.0.1",
         "npm:@types/node@^22.13.4",
         "npm:@vercel/ncc@~0.38.3",
-        "npm:ansis@^3.15.0",
+        "npm:chalk@^5.4.1",
         "npm:dayjs@^1.11.13",
         "npm:dotenv@^16.4.7",
         "npm:ical.js@^2.1.0",

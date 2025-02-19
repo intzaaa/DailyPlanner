@@ -19,8 +19,7 @@ export const config = {
     owner: process.env["DP_OWNER"]!,
     bio: process.env["DP_BIO"]!,
   },
-  log_level:
-    ((process.env["DP_LOG_LEVEL"] as LogLevel) ?? "INFO") satisfies LogLevel,
+  log_level: ((process.env["DP_LOG_LEVEL"] as LogLevel) ?? "INFO") satisfies LogLevel,
 } as const;
 
 export const log = logger("index", config.log_level);
