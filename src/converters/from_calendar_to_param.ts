@@ -2,7 +2,9 @@ import { PlannerCalendar } from "../structures/calendar.ts";
 import type { OpenAI as LLM } from "openai";
 import { e } from "../utils/string_fallback.ts";
 
-export const from_calendar_to_param = (schedule: PlannerCalendar): LLM.Chat.Completions.ChatCompletionMessageParam => {
+export const from_calendar_to_param = (
+  schedule: PlannerCalendar,
+): LLM.Chat.Completions.ChatCompletionMessageParam => {
   return {
     role: "developer",
     content:
@@ -22,7 +24,7 @@ export const from_calendar_to_param = (schedule: PlannerCalendar): LLM.Chat.Comp
             `        End: ${event.end_time}` +
             e`        Description: ${event.description}` +
             e`        Recurrence: ${event.recurrence?.frequency}` +
-            e`        Location: ${event.location}`
+            e`        Location: ${event.location}`,
         )
         .join("\n") +
       "\n",

@@ -36,7 +36,12 @@ export default {
     tasks +
     "\n",
 
-  plan_arrange: (owner: string, eventTime: string, activities: string, tasks: string[]) =>
+  plan_arrange: (
+    owner: string,
+    eventTime: string,
+    activities: string,
+    tasks: string[],
+  ) =>
     time() +
     `You are a comprehensive planner hired by ${owner} to plan the completion of multiple tasks in the upcoming ${eventTime}. ` +
     `An excellent plan should have clear objectives, feasible strategies, built-in flexibility, and feedback mechanisms.` +
@@ -54,7 +59,12 @@ export default {
     summary +
     "\n",
 
-  coordinate_meeting: (owner: string, participants: string, meetingAgenda: string, location: string) =>
+  coordinate_meeting: (
+    owner: string,
+    participants: string,
+    meetingAgenda: string,
+    location: string,
+  ) =>
     time() +
     `You are a communication and coordination expert now assisting ${owner} in organizing a meeting. ` +
     `The meeting agenda is: ${meetingAgenda}. Please ensure that the meeting is held at ${location} and coordinate with ${participants} to ensure all key participants are on time.` +

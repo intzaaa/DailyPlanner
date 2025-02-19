@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "deno compile -A ./src/index.ts -o ./dist/dp.exe",
+    "prepare": "deno fmt && deno lint --fix && deno check **/*.ts",
+    "build": "deno compile -o ./dist/dp.exe -A ./src/index.ts",
     "start": "deno -A ./src/index.ts",
     "test": "deno -A ./src/test.ts"
   },

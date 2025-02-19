@@ -20,7 +20,9 @@ export default async () => {
     ],
     response_format: zodResponseFormat(
       z.object({
-        core_objectives: z.array(z.string()).describe("The main objectives or ideals of the plan."),
+        core_objectives: z.array(z.string()).describe(
+          "The main objectives or ideals of the plan.",
+        ),
 
         reverse_engineering: z.object({
           ultimate_goals: z.array(
@@ -28,21 +30,21 @@ export default async () => {
               description: z.string(),
               timeframe: z.string(),
               metrics: z.array(z.string()),
-            })
+            }),
           ),
           intermediate_goals: z.array(
             z.object({
               description: z.string(),
               timeframe: z.string(),
               metrics: z.array(z.string()),
-            })
+            }),
           ),
           immediate_goals: z.array(
             z.object({
               description: z.string(),
               timeframe: z.string(),
               metrics: z.array(z.string()),
-            })
+            }),
           ),
         }),
 
@@ -52,21 +54,21 @@ export default async () => {
               task: z.string(),
               metrics: z.array(z.string()),
               timeframe: z.string(),
-            })
+            }),
           ),
           medium_priority: z.array(
             z.object({
               task: z.string(),
               metrics: z.array(z.string()),
               timeframe: z.string(),
-            })
+            }),
           ),
           low_priority: z.array(
             z.object({
               task: z.string(),
               metrics: z.array(z.string()),
               timeframe: z.string(),
-            })
+            }),
           ),
         }),
 
@@ -97,7 +99,7 @@ export default async () => {
 
         next_steps: z.array(z.string()),
       }),
-      "assign_tasks"
+      "assign_tasks",
     ),
   });
 

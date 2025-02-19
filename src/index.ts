@@ -3,6 +3,7 @@ import { OpenAI as LLM } from "openai";
 import { deep_check } from "./utils/deep_check.ts";
 import { execute_defaults } from "./utils/execute_defaults.ts";
 import { logger, LogLevel } from "./utils/logger.ts";
+import process from "node:process";
 
 export const dirname: string = import.meta.dirname!;
 
@@ -18,7 +19,8 @@ export const config = {
     owner: process.env["DP_OWNER"]!,
     bio: process.env["DP_BIO"]!,
   },
-  log_level: ((process.env["DP_LOG_LEVEL"] as LogLevel) ?? "INFO") satisfies LogLevel,
+  log_level:
+    ((process.env["DP_LOG_LEVEL"] as LogLevel) ?? "INFO") satisfies LogLevel,
 } as const;
 
 export const log = logger("index", config.log_level);

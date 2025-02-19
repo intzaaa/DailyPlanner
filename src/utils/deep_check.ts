@@ -6,9 +6,11 @@ export const deep_check = (obj: object, parents: string[] = []) =>
         acc.true.push(...sub.true);
         acc.false.push(...sub.false);
       } else {
-        (value === undefined || value === null ? acc.false : acc.true).push([...parents, key].join("."));
+        (value === undefined || value === null ? acc.false : acc.true).push(
+          [...parents, key].join("."),
+        );
       }
       return acc;
     },
-    { true: [], false: [] }
+    { true: [], false: [] },
   );
