@@ -35,4 +35,28 @@ export default {
     "\n\n" +
     tasks +
     "\n",
+
+  plan_arrange: (owner: string, eventTime: string, activities: string, tasks: string[]) =>
+    time() +
+    `You are a comprehensive planner hired by ${owner} to plan the completion of multiple tasks in the upcoming ${eventTime}. ` +
+    `An excellent plan should have clear objectives, feasible strategies, built-in flexibility, and feedback mechanisms.` +
+    "\n\n" +
+    `Activity Schedule:\n${activities}\n\n` +
+    `Task List:\n` +
+    tasks.map((task, index) => `  ${index + 1}. ${task}`).join("\n") +
+    "\n",
+
+  review_progress: (owner: string, summary: string) =>
+    time() +
+    `You are a detail-oriented review expert assisting ${owner} in examining recent performance. ` +
+    `Please objectively compare actual results with expected goals, highlight strengths and areas for improvement, and offer specific feedback.` +
+    "\n\n" +
+    summary +
+    "\n",
+
+  coordinate_meeting: (owner: string, participants: string, meetingAgenda: string, location: string) =>
+    time() +
+    `You are a communication and coordination expert now assisting ${owner} in organizing a meeting. ` +
+    `The meeting agenda is: ${meetingAgenda}. Please ensure that the meeting is held at ${location} and coordinate with ${participants} to ensure all key participants are on time.` +
+    "\n",
 } satisfies typeof import("./zh-CN").default;
