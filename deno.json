@@ -1,8 +1,51 @@
 {
+  "$schema": "https://deno.land/x/deno/cli/schemas/config-file.v1.json",
+  "name": "@intzaaa/daily-planner",
+  "exports": "./src/index.ts",
+  "license": "AGPL-3.0-only",
+  "version": "0.0.1",
+  "tasks": {
+    "prepare": "deno fmt && deno lint --fix && deno check ./src/**/*.ts",
+    "build": "deno compile -o ./dist/dp.exe -A ./src/index.ts",
+    "start": "deno -A ./src/index.ts",
+    "test": "deno -A ./src/test.ts",
+    "update": "deno outdated --update --latest"
+  },
+  "imports": {
+    "@vercel/ncc": "npm:@vercel/ncc@^0.38.3",
+    "chalk": "npm:chalk@^5.4.1",
+    "dayjs": "npm:dayjs@^1.11.13",
+    "dotenv": "npm:dotenv@^16.4.7",
+    "ical.js": "npm:ical.js@^2.1.0",
+    "openai": "npm:openai@^4.85.2",
+    "zod": "npm:zod@^3.24.2",
+    "@types/node": "npm:@types/node@^22.13.4"
+  },
   "lint": {
     "rules": {
       "tags": ["recommended"],
       "exclude": ["no-explicit-any", "require-await"]
     }
+  },
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "strictBuiltinIteratorReturn": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowUnusedLabels": true,
+    "allowUnreachableCode": true
   }
 }

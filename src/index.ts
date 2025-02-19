@@ -11,9 +11,9 @@ export const config = {
   llm: {
     base_url: process.env["DP_BASE_URL"] ?? "https://api.openai.com/v1",
     api_key: process.env["DP_API_KEY"]!,
-    model: process.env["DP_MODEL"]! ?? "gpt-4o-turbo",
+    model: process.env["DP_MODEL"]! ?? "gpt-4o-mini",
   },
-  subscription: process.env["DP_LINK"]!,
+  subscription: process.env["DP_SUBSCRIPTION"]!,
   info: {
     owner: process.env["DP_OWNER"]!,
     bio: process.env["DP_BIO"]!,
@@ -22,7 +22,7 @@ export const config = {
     "INFO") satisfies LogLevel,
 } as const;
 
-export const log = await logger(config.log_level);
+const log = await logger("index", config.log_level);
 
 {
   const check = deep_check(config);

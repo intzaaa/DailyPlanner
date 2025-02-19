@@ -15,7 +15,7 @@ export default async () => {
     messages: [
       {
         role: "system",
-        content: chats.describe_icalendar(config.info.owner, ical),
+        content: chats.describe_icalendar.request(config.info.owner, ical),
       },
     ],
   });

@@ -1,28 +1,17 @@
 {
   "version": "4",
   "specifiers": {
-    "npm:@intzaaa/logger@^1.1.0": "1.1.0",
-    "npm:@typed/curry@^1.0.1": "1.0.1",
+    "npm:@types/node@*": "22.12.0",
     "npm:@types/node@^22.13.4": "22.13.4",
     "npm:@vercel/ncc@~0.38.3": "0.38.3",
     "npm:chalk@^5.4.1": "5.4.1",
     "npm:dayjs@^1.11.13": "1.11.13",
     "npm:dotenv@^16.4.7": "16.4.7",
     "npm:ical.js@^2.1.0": "2.1.0",
-    "npm:openai@^4.85.0": "4.85.2_zod@3.24.2",
-    "npm:typescript@^5.7.3": "5.7.3",
+    "npm:openai@^4.85.2": "4.85.2_zod@3.24.2",
     "npm:zod@^3.24.2": "3.24.2"
   },
   "npm": {
-    "@intzaaa/logger@1.1.0": {
-      "integrity": "sha512-2fpVKwe/jmSEhFGJScXRYbLFIB3ovgMVaX9RlMQ2Lbu+qyMhmVsa987U3wvWlpc36aYpbAkCAN53bhKItQX9JQ==",
-      "dependencies": [
-        "chalk"
-      ]
-    },
-    "@typed/curry@1.0.1": {
-      "integrity": "sha512-ifSe9XfT+K0pycWdfIAOJda0gqHCjqMXqv+Ecb0mm6uCOI6SnDXykl7vU1lOafZbuptAmeFbdBqj+093GX5GxQ=="
-    },
     "@types/node-fetch@2.6.12": {
       "integrity": "sha512-8nneRWKCg3rMtF69nLQJnOYUcbafYeFSjqkw3jCRLsqkWFlHaoQrr5mXmofFGOx3DKn7UfmBMyov8ySvLRVldA==",
       "dependencies": [
@@ -234,9 +223,6 @@
     "tr46@0.0.3": {
       "integrity": "sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw=="
     },
-    "typescript@5.7.3": {
-      "integrity": "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="
-    },
     "undici-types@5.26.5": {
       "integrity": "sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA=="
     },
@@ -261,20 +247,15 @@
     }
   },
   "workspace": {
-    "packageJson": {
-      "dependencies": [
-        "npm:@intzaaa/logger@^1.1.0",
-        "npm:@typed/curry@^1.0.1",
-        "npm:@types/node@^22.13.4",
-        "npm:@vercel/ncc@~0.38.3",
-        "npm:chalk@^5.4.1",
-        "npm:dayjs@^1.11.13",
-        "npm:dotenv@^16.4.7",
-        "npm:ical.js@^2.1.0",
-        "npm:openai@^4.85.0",
-        "npm:typescript@^5.7.3",
-        "npm:zod@^3.24.2"
-      ]
-    }
+    "dependencies": [
+      "npm:@types/node@^22.13.4",
+      "npm:@vercel/ncc@~0.38.3",
+      "npm:chalk@^5.4.1",
+      "npm:dayjs@^1.11.13",
+      "npm:dotenv@^16.4.7",
+      "npm:ical.js@^2.1.0",
+      "npm:openai@^4.85.2",
+      "npm:zod@^3.24.2"
+    ]
   }
 }
