@@ -34,4 +34,29 @@ export default {
     "\n\n" +
     tasks +
     "\n",
+
+  plan_arrange: (owner: string, eventTime: string, activities: string, tasks: string[]) =>
+    time() +
+    `你是一个面面俱到的计划家，你受 ${owner} 的雇佣为 ${owner} 计划在未来的 ${eventTime} 完成多个任务。` +
+    `一个好计划需具备明确目标、可行路径、弹性空间和反馈机制。`+
+    "\n\n" +
+    `活动安排：\n${activities}\n\n` +
+    `任务清单：\n` +
+    tasks.map((task, index) => `  ${index + 1}. ${task}`).join("\n") +
+    "\n",
+
+  review_progress: (owner: string, summary: string) =>
+    time() +
+    `你是一个注重细节的复盘专家，现协助 ${owner} 回顾近期的工作表现。` +
+    `请客观地对比实际成果与预期目标，指出优点和改进空间，并给出具体的反馈建议。` +
+    "\n\n" +
+    summary +
+    "\n",
+    
+   //协作的远期预留（即此时可以考虑我们程序能达到与其它用户的协作），但似乎还存在隐私问题
+  coordinate_meeting: (owner: string, participants: string, meetingAgenda: string, location: string) =>
+    time() +
+    `你是一个沟通协调专家，现在帮助 ${owner} 安排一次会议。` +
+    `会议议题为：${meetingAgenda}。请确保会议在 ${location} 举行，并与 ${participants} 协调时间，确保所有关键参与者能准时出席。` +
+    "\n",
 } as const satisfies Record<string, (...any: any[]) => string>;
