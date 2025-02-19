@@ -1,10 +1,10 @@
 import "dotenv/config";
 import { OpenAI as LLM } from "openai";
-import { deep_check } from "./utils/deep_check";
-import { execute_defaults } from "./utils/execute_defaults";
-import { logger, LogLevel } from "./utils/logger";
+import { deep_check } from "./utils/deep_check.ts";
+import { execute_defaults } from "./utils/execute_defaults.ts";
+import { logger, LogLevel } from "./utils/logger.ts";
 
-export const dirname = import.meta.dirname;
+export const dirname: string = import.meta.dirname!;
 
 export const config = {
   lang: process.env["DP_LANG"] ?? "zh",
@@ -18,16 +18,16 @@ export const config = {
     owner: process.env["DP_OWNER"]!,
     bio: process.env["DP_BIO"]!,
   },
-  log_level: (process.env["DP_LOG_LEVEL"] ?? "info") as LogLevel,
+  log_level: ((process.env["DP_LOG_LEVEL"] as LogLevel) ?? "INFO") satisfies LogLevel,
 } as const;
 
-export const log = logger(import.meta.filename, config.log_level);
+export const log = logger("index", config.log_level);
 
 {
   const check = deep_check(config);
 
   if (check.false.length) {
-    log(`The following values are missing:\n${check.false.join(" ")}`, "ERROR");
+    log("FATAL", `The following values are missing:\n${check.false.join(" ")}`);
     process.exit(1);
   }
 }
@@ -37,6 +37,8 @@ export const llm = new LLM({
   apiKey: config.llm.api_key,
 });
 
-log(`Successfully loaded configuration: ${JSON.stringify(config)}`);
+log("INFO", `Successfully loaded configuration:`, config);
 
-execute_defaults(import("./functions/describe_icalendar"));
+execute_defaults();
+// import("./functions/describe_icalendar"),
+// import("./functions/assign_tasks.ts")

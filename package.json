@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "ncc build ./src/index.ts -a -m -o ./dist",
-    "start": "node --import @swc-node/register/esm-register ./src/index.ts",
-    "test": "node --import @swc-node/register/esm-register ./src/test.ts"
+    "build": "deno compile ./src/index.ts",
+    "start": "deno --allow-all ./src/index.ts",
+    "test": "deno --allow-all ./src/test.ts"
   },
   "keywords": [],
   "author": "",

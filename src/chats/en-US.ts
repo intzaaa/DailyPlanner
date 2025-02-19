@@ -35,4 +35,4 @@ export default {
     "\n\n" +
     tasks +
     "\n",
-} satisfies typeof import("./zh-CN").default;
+} satisfies typeof import("./zh-CN.ts").default;

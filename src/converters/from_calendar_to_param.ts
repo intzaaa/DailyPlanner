@@ -1,6 +1,6 @@
-import { PlannerCalendar } from "../structures/calendar";
+import { PlannerCalendar } from "../structures/calendar.ts";
 import type { OpenAI as LLM } from "openai";
-import { e } from "../utils/string_fallback";
+import { e } from "../utils/string_fallback.ts";
 
 export const from_calendar_to_param = (schedule: PlannerCalendar): LLM.Chat.Completions.ChatCompletionMessageParam => {
   return {

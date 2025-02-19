@@ -1,5 +1,5 @@
 import ical_js from "ical.js";
-import { Calendar, CalendarEvent } from "../structures/calendar";
+import { Calendar, CalendarEvent } from "../structures/calendar.ts";
 
 export const from_ical_to_calendar = (ical: string): Calendar => {
   const component = new ical_js.Component(ical_js.parse(ical));
