@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { OpenAI as LLM } from "openai";
 import { deep_check } from "./utils/deep_check.ts";
-import { execute_defaults } from "./utils/execute_defaults.ts";
 import { logger, LogLevel } from "./utils/logger.ts";
 import process from "node:process";
 
@@ -19,10 +18,11 @@ export const config = {
     owner: process.env["DP_OWNER"]!,
     bio: process.env["DP_BIO"]!,
   },
-  log_level: ((process.env["DP_LOG_LEVEL"] as LogLevel) ?? "INFO") satisfies LogLevel,
+  log_level: ((process.env["DP_LOG_LEVEL"] as LogLevel | undefined) ??
+    "INFO") satisfies LogLevel,
 } as const;
 
-export const log = logger("index", config.log_level);
+export const log = await logger(config.log_level);
 
 {
   const check = deep_check(config);
@@ -39,7 +39,3 @@ export const llm = new LLM({
 });
 
 log("INFO", `Successfully loaded configuration:`, config);
-
-execute_defaults();
-// import("./functions/describe_icalendar"),
-// import("./functions/assign_tasks.ts")

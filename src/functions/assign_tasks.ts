@@ -6,7 +6,7 @@ import { zodResponseFormat } from "openai/helpers/zod";
 export default async () => {
   const { config, llm } = await import("../index.ts");
 
-  const log = logger("assign_task", config.log_level);
+  const l = await logger("assign_task");
 
   const chats = await get_chat();
 
@@ -105,7 +105,7 @@ export default async () => {
 
   const result = (await promise).choices[0]!.message.content!;
 
-  log("INFO", result);
+  l("INFO", result);
 
   return result;
 };

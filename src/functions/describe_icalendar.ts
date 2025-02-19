@@ -5,7 +5,7 @@ import { logger } from "../utils/logger.ts";
 export default async () => {
   const { config, llm } = await import("../index.ts");
 
-  const log = logger("describe_icalendar", config.log_level);
+  const log = await logger("describe_icalendar");
 
   const chats = await get_chat();
   const ical = await get_ical();

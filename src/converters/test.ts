@@ -3,7 +3,7 @@ import { from_ical_to_calendar } from "./from_ical_to_calendar.ts";
 import { resolve } from "node:path";
 import { logger } from "../utils/logger.ts";
 
-const log = logger("test", "INFO");
+const log = await logger("test", "INFO");
 
 export default async () => {
   log("INFO", `Testing ${from_ical_to_calendar.name}...`);
