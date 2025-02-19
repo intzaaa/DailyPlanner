@@ -5,7 +5,8 @@
   "license": "AGPL-3.0-only",
   "version": "0.0.1",
   "tasks": {
-    "prepare": "deno fmt && deno lint --fix && deno check ./src/**/*.ts",
+    "check": "deno check ./src/**/*.ts && deno lint",
+    "prepare": "deno fmt && deno lint --fix && deno task check",
     "build": "deno compile -o ./dist/dp.exe -A ./src/index.ts",
     "start": "deno -A ./src/index.ts",
     "test": "deno -A ./src/test.ts",
