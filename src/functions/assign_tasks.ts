@@ -105,7 +105,7 @@ export default async () => {
 
   const result = (await promise).choices[0]!.message.content!;
 
-  log(result);
+  log("INFO", result);
 
   return result;
 };
