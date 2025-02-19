@@ -4,3 +4,6 @@ node_modules
 .ics
 *.env*
 !example.env
+
+*tmp*
+*temp*

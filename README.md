@@ -4,15 +4,14 @@
 
 ### Setup
 
-- node >= 22
-- pnpm >= 9
+- deno >= 2
 
 ```bash
-pnpm i
+deno install
 ```
 
 ```bash
-pnpm build // ncc build
-pnpm start // tsx run index
-pnpm test  // tsx run test
+deno run build
+deno run start
+deno run test
 ```
