@@ -1,15 +1,15 @@
-import { Error, Maybe } from "./maybe.ts";
+import { error, Maybe } from "./maybe.ts";
 
 export const retry = async <
   F extends (...any: any[]) => R,
   R extends Maybe<any>,
 >(
   timeout: number,
-  time: number,
+  counts: number,
   func: F,
 ): Promise<Maybe<Awaited<R>>> => {
-  if (time <= 0) {
-    return Error;
+  if (counts <= 0) {
+    return error("retry counts exhausted");
   }
 
   const symbol = Symbol("timeout");
@@ -21,7 +21,7 @@ export const retry = async <
   ]);
 
   if (result === symbol || result === Error) {
-    return retry(timeout, time - 1, func);
+    return retry(timeout, counts - 1, func);
   } else {
     return result;
   }

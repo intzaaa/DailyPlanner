@@ -8,14 +8,13 @@ export type Task = {
 };
 
 export const ZodTask = z.object({
-  summary: z.string(),
+  summary: z.string().min(1, "Summary required"),
   description: z.string(),
-  deadline: z.string(),
-  status: z.union([
-    z.literal("pending"),
-    z.literal("in_progress"),
-    z.literal("completed"),
-  ]),
+  deadline: z.string().regex(
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/,
+    "Invalid datetime",
+  ),
+  status: z.enum(["pending", "in_progress", "completed"]),
 });
 
 export type Tasks = {
@@ -25,7 +24,7 @@ export type Tasks = {
 };
 
 export const ZodTasks = z.object({
-  short_term: z.array(ZodTask),
-  middle_term: z.array(ZodTask),
-  long_term: z.array(ZodTask),
+  short_term: z.array(ZodTask).default([]),
+  middle_term: z.array(ZodTask).default([]),
+  long_term: z.array(ZodTask).default([]),
 });

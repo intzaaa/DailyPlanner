@@ -1,4 +1,4 @@
-import { RecurrenceRule } from "../structures/calendars.ts";
+import { RecurrenceRule } from "../types/calendar.ts";
 
 export const parse_rrule = (rrule: string): RecurrenceRule => {
   const rule: RecurrenceRule = { freq: "weekly" };

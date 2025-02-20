@@ -1,7 +1,7 @@
 import {
   HumanFriendlyCalendar,
   HumanFriendlyCalendarEvent,
-} from "../structures/calendars.ts";
+} from "../types/calendar.ts";
 import { convert_ical_date_to_iso, parse_rrule } from "./utils.ts";
 
 /**

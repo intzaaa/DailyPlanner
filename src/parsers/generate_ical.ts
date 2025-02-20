@@ -1,4 +1,4 @@
-import { HumanFriendlyCalendar } from "../structures/calendars.ts";
+import { HumanFriendlyCalendar } from "../types/calendar.ts";
 import {
   convert_ical_date_to_iso,
   convert_iso_to_ical_date,

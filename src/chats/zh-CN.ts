@@ -2,8 +2,9 @@ import { zodResponseFormat } from "openai/helpers/zod";
 import {
   HumanFriendlyCalendar,
   ZodHumanFriendlyCalendar,
-} from "../structures/calendars.ts";
-import { ZodTasks } from "../structures/tasks.ts";
+} from "../types/calendar.ts";
+import { Tasks, ZodTasks } from "../types/task.ts";
+import { prettify_json } from "../utils/prettify_json.ts";
 
 const time = () => `现在的时间是：${new Date().toUTCString()}\n`;
 
@@ -18,7 +19,7 @@ export default {
     response: zodResponseFormat(ZodHumanFriendlyCalendar, "describe_icalendar"),
   },
   assign_tasks: {
-    request: (owner: string, bio: string) =>
+    request: (owner: string, bio: string, activities: HumanFriendlyCalendar) =>
       time() +
       `你是一个面面俱到的计划家，你受 ${owner} 的雇佣为 ${owner} 布置任务，帮助他一步一步地实现自己的理想。` +
       `你需要明确 ${owner} 理想的具体内涵，将其分解为长期、中期、短期可验证的阶段目标，每个目标需包含时间节点与量化指标。` +
@@ -29,6 +30,10 @@ export default {
       `${owner} 在下面给出了自己的简历：` +
       "\n\n" +
       bio +
+      "\n\n" +
+      `以下是 ${owner} 的活动安排：` +
+      "\n\n" +
+      prettify_json(activities) +
       "\n",
     response: zodResponseFormat(ZodTasks, "assign_tasks"),
   },
@@ -36,7 +41,7 @@ export default {
     request: (
       owner: string,
       activities: HumanFriendlyCalendar,
-      tasks: string,
+      tasks: Tasks,
     ) =>
       time() +
       `你是一个面面俱到的计划家，你受 ${owner} 的雇佣为 ${owner} 计划未来的活动，帮助他高质量地完成任务。` +
@@ -44,12 +49,13 @@ export default {
       `明确目标应具体且与核心诉求对齐，避免空泛或过度理想化；执行路径需拆解为阶段性任务，设置时间节点与量化指标；预留20%-30%弹性时间应对突发情况，避免机械式填满日程。` +
       `生活安排需建立动态平衡系统：将时间划分为创造、恢复、关系三类区块，每日保留固定时段处理深度工作，用生理节律匹配任务难度，高强度思考安排在认知峰值期。` +
       `每周设置缓冲日处理积压事务，每季度进行目标校准，通过记录时间流向与成果产出比调整节奏。关键是以系统思维替代碎片化管理，在坚持核心框架的同时保持迭代能力，最终形成可持续的成长闭环。` +
-      `注意！你计划的活动不能与现有的活动冲突。` +
+      `注意！你计划的活动不能与现有的活动冲突。你只需要给出与现有活动不冲突的部分！` +
       "\n\n" +
-      activities +
+      prettify_json(activities) +
       "\n\n" +
-      tasks +
+      prettify_json(tasks) +
       "\n",
+    response: zodResponseFormat(ZodHumanFriendlyCalendar, "plan_future"),
   },
   plan_arrange: {
     request: (
@@ -93,6 +99,6 @@ export default {
   string,
   {
     request: (...any: any[]) => string;
-    response?: ReturnType<typeof zodResponseFormat> | undefined;
+    response?: ReturnType<typeof zodResponseFormat>;
   }
 >;

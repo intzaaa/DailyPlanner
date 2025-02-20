@@ -1,20 +1,23 @@
-import { get_chat } from "../utils/get_chat.ts";
-import { logger } from "../utils/logger.ts";
-import { Error, Maybe } from "../utils/maybe.ts";
+import { get_chat } from "../utils/getter/get_chat.ts";
+import { error, Maybe, success } from "../utils/maybe.ts";
+import zh_CN from "../chats/zh-CN.ts";
+import { Config } from "../types/config.ts";
+import type { OpenAI as LLM } from "openai";
 
-export default async (): Promise<Maybe<string>> => {
-  const { config, llm } = await import("../index.ts");
-
-  const l = await logger("assign_task");
-
-  const chats = await get_chat();
+export default async (
+  llm: LLM,
+  model: Config["llm"]["model"],
+  language: Config["lang"],
+  ...params: Parameters<typeof zh_CN.assign_tasks.request>
+): Promise<Maybe<string>> => {
+  const chats = await get_chat(language);
 
   const completion = await llm.chat.completions.create({
-    model: config.llm.model,
+    model,
     messages: [
       {
         role: "system",
-        content: chats.assign_tasks.request(config.info.owner, config.info.bio),
+        content: chats.assign_tasks.request(...params),
       },
     ],
     response_format: chats.assign_tasks.response,
@@ -22,11 +25,7 @@ export default async (): Promise<Maybe<string>> => {
 
   const result = completion.choices[0]?.message.content;
 
-  if (!result) {
-    l("ERROR", "Failed to generate response.");
-    return Error;
-  }
+  if (!result) return error("Failed to generate response.");
 
-  l("INFO", result);
-  return result;
+  return success(result);
 };

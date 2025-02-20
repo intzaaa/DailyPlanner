@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "npm:@typed/curry@^1.0.1": "1.0.1",
     "npm:@types/node@*": "22.12.0",
     "npm:@types/node@^22.13.4": "22.13.4",
     "npm:@vercel/ncc@~0.38.3": "0.38.3",
@@ -12,6 +13,9 @@
     "npm:zod@^3.24.2": "3.24.2"
   },
   "npm": {
+    "@typed/curry@1.0.1": {
+      "integrity": "sha512-ifSe9XfT+K0pycWdfIAOJda0gqHCjqMXqv+Ecb0mm6uCOI6SnDXykl7vU1lOafZbuptAmeFbdBqj+093GX5GxQ=="
+    },
     "@types/node-fetch@2.6.12": {
       "integrity": "sha512-8nneRWKCg3rMtF69nLQJnOYUcbafYeFSjqkw3jCRLsqkWFlHaoQrr5mXmofFGOx3DKn7UfmBMyov8ySvLRVldA==",
       "dependencies": [
@@ -248,6 +252,7 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:@typed/curry@^1.0.1",
       "npm:@types/node@^22.13.4",
       "npm:@vercel/ncc@~0.38.3",
       "npm:chalk@^5.4.1",

@@ -13,6 +13,7 @@
     "update": "deno outdated --update --latest"
   },
   "imports": {
+    "@typed/curry": "npm:@typed/curry@^1.0.1",
     "@vercel/ncc": "npm:@vercel/ncc@^0.38.3",
     "chalk": "npm:chalk@^5.4.1",
     "dayjs": "npm:dayjs@^1.11.13",

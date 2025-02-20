@@ -1,22 +1,31 @@
-import { get_chat } from "../utils/get_chat.ts";
-import { get_ical } from "../utils/get_ical.ts";
-import { logger } from "../utils/logger.ts";
-import { Error, Maybe } from "../utils/maybe.ts";
+import { get_chat } from "../utils/getter/get_chat.ts";
+import { get_ical } from "../utils/getter/get_ical.ts";
+import { error, is_error, Maybe, success } from "../utils/maybe.ts";
+import zh_CN from "../chats/zh-CN.ts";
+import { OpenAI as LLM } from "openai";
 
-export default async (): Promise<Maybe<string>> => {
-  const { config, llm } = await import("../index.ts");
+import { ChatLanguage } from "../chats/languages.ts";
+import { Config } from "../types/config.ts";
 
-  const l = await logger("describe_icalendar");
-
-  const chats = await get_chat();
-  const ical = await get_ical();
+export const describe_icalendar = async (
+  llm: LLM,
+  model: Config["llm"]["model"],
+  language: ChatLanguage,
+  ical_location: string,
+  owner: Parameters<typeof zh_CN.describe_icalendar.request>[0],
+): Promise<Maybe<string>> => {
+  const chats = await get_chat(language);
+  const ical = await get_ical(ical_location);
+  if (is_error(ical)) {
+    return ical;
+  }
 
   const completion = await llm.chat.completions.create({
-    model: config.llm.model,
+    model,
     messages: [
       {
         role: "system",
-        content: chats.describe_icalendar.request(config.info.owner, ical),
+        content: chats.describe_icalendar.request(owner, ical[1]),
       },
     ],
     response_format: chats.describe_icalendar.response,
@@ -24,11 +33,7 @@ export default async (): Promise<Maybe<string>> => {
 
   const result = completion.choices[0]?.message.content;
 
-  if (!result) {
-    l("ERROR", "Failed to generate response.");
-    return Error;
-  }
+  if (!result) return error("Failed to generate response.");
 
-  l("INFO", result);
-  return result;
+  return success(result);
 };

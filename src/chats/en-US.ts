@@ -43,6 +43,7 @@ export default {
       "\n\n" +
       tasks +
       "\n",
+    response: zh_CN.plan_future.response,
   },
   plan_arrange: {
     request: (
