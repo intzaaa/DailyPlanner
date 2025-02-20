@@ -9,6 +9,7 @@
     "npm:dayjs@^1.11.13": "1.11.13",
     "npm:ical.js@^2.1.0": "2.1.0",
     "npm:openai@^4.85.3": "4.85.3_zod@3.24.2",
+    "npm:recursive-diff@^1.0.9": "1.0.9",
     "npm:zod@^3.24.2": "3.24.2"
   },
   "npm": {
@@ -219,6 +220,9 @@
         "node-fetch",
         "zod"
       ]
+    },
+    "recursive-diff@1.0.9": {
+      "integrity": "sha512-5mqpskzvXDo5Vy29Vj8tH30a0+XBmY11aqWGoN/uB94UHRwndX2EuPvH+WtbqOYkrwAF718/lDo6U4CB1qSSqQ=="
     },
     "tr46@0.0.3": {
       "integrity": "sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw=="
@@ -596,6 +600,7 @@
       "npm:dayjs@^1.11.13",
       "npm:ical.js@^2.1.0",
       "npm:openai@^4.85.3",
+      "npm:recursive-diff@^1.0.9",
       "npm:zod@^3.24.2"
     ]
   }

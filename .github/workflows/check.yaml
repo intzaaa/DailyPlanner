@@ -1,4 +1,4 @@
-name: Check
+name: Check & Test
 
 on:
   push: {}
@@ -16,3 +16,5 @@ jobs:
           deno-version: v2.x
       - name: Run Deno check
         run: deno task check
+      - name: Run Deno test
+        run: deno task test

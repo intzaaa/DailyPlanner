@@ -46,25 +46,25 @@ export const serialize_rrule = (recurrence: RecurrenceRule): string => {
     parts.push(`COUNT=${recurrence.count}`);
   }
   if (recurrence.until) {
-    parts.push(`UNTIL=${recurrence.until.replace(/[-:]/g, "").split(".")[0]}`); // 格式化日期
+    parts.push(`UNTIL=${recurrence.until.replace(/[-:]/g, "").split(".")[0]}`);
   }
   return parts.join(";");
 };
 
-export const convert_ical_date_to_iso = (icalDate: string): string => {
-  const match = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z?$/.exec(
-    icalDate,
-  );
-  if (match) {
-    const [_, year, month, day, hour, minute, second] = match;
-    return `${year}-${month}-${day}T${hour}:${minute}:${second}${
-      icalDate.endsWith("Z") ? "Z" : ""
-    }`;
-  }
-  return icalDate;
+export const convert_ical_date_to_iso_date = (ical_date: string): string => {
+  const year = ical_date.substring(0, 4);
+  const month = ical_date.substring(4, 6);
+  const day = ical_date.substring(6, 8);
+
+  const time = ical_date.substring(9, 15);
+  const hours = time.substring(0, 2);
+  const minutes = time.substring(2, 4);
+  const seconds = time.substring(4, 6);
+  const timezone = ical_date.substring(15);
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
 };
 
-export const convert_iso_to_ical_date = (iso_date: string): string => {
-  return iso_date.replace(/[-:]/g, "").replace(/\.\d+/, "").replace("T", "T") +
-    (iso_date.endsWith("Z") ? "Z" : "");
+export const convert_iso_date_to_ical_date = (iso_date: string): string => {
+  return iso_date.replace(/-/g, "").replace(/:/g, "");
 };

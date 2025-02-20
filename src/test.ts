@@ -4,6 +4,7 @@ import { parse_ical } from "./parsers/parse_ical.ts";
 import { logger } from "./utils/logger.ts";
 import { generate_ical } from "./parsers/generate_ical.ts";
 import { equals } from "ramda";
+import { getDiff } from "recursive-diff";
 
 const log = logger("TRACE", "Test");
 const info = log("INFO");
@@ -44,8 +45,8 @@ test("parsers");
   if (new_calendar[0]) fatal(["3. Error:", new_calendar[0].reason]);
   info([new_calendar[1]]);
 
-  if (equals(calendar[1], new_calendar[1])) {
-    fatal(["4. Error:", "Not equal"]);
+  if (!equals(calendar[1], new_calendar[1])) {
+    fatal(["4. Error:", "Not equal", getDiff(calendar[1], new_calendar[1])]);
   }
 }
 

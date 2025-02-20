@@ -1,10 +1,6 @@
 import { HumanFriendlyCalendar } from "../types/calendar.ts";
 import { error, Maybe, success } from "../utils/maybe.ts";
-import {
-  convert_ical_date_to_iso,
-  convert_iso_to_ical_date,
-  serialize_rrule,
-} from "./utils.ts";
+import { convert_iso_date_to_ical_date, serialize_rrule } from "./utils.ts";
 
 export const generate_ical = (
   calendar: HumanFriendlyCalendar,
@@ -19,7 +15,7 @@ export const generate_ical = (
       lines.push(`TZID:${calendar.timezone}`);
     }
     calendar.updated &&
-      lines.push(`DTSTAMP:${convert_iso_to_ical_date(calendar.updated)}`);
+      lines.push(`DTSTAMP:${convert_iso_date_to_ical_date(calendar.updated)}`);
     lines.push(`X-WR-CALNAME:${calendar.name}`);
     lines.push(`X-WR-CALDESC:${calendar.description}`);
 
@@ -28,8 +24,9 @@ export const generate_ical = (
       lines.push(`UID:${event.uid}`);
       lines.push(`SUMMARY:${event.title}`);
       event.start &&
-        lines.push(`DTSTART:${convert_iso_to_ical_date(event.start)}`);
-      event.end && lines.push(`DTEND:${convert_ical_date_to_iso(event.end)}`);
+        lines.push(`DTSTART:${convert_iso_date_to_ical_date(event.start)}`);
+      event.end &&
+        lines.push(`DTEND:${convert_iso_date_to_ical_date(event.end)}`);
       event.location && lines.push(`LOCATION:${event.location}`);
       event.description && lines.push(`DESCRIPTION:${event.description}`);
       if (event.categories && event.categories.length > 0) {

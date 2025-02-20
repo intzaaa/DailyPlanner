@@ -3,7 +3,7 @@ import {
   HumanFriendlyCalendarEvent,
 } from "../types/calendar.ts";
 import { error, Maybe, success } from "../utils/maybe.ts";
-import { convert_ical_date_to_iso, parse_rrule } from "./utils.ts";
+import { convert_ical_date_to_iso_date, parse_rrule } from "./utils.ts";
 
 /**
  * Parses an iCalendar (ICS) string into a human-friendly calendar object.
@@ -77,10 +77,10 @@ export const parse_ical = (ics: string): Maybe<HumanFriendlyCalendar> => {
             current_event.title = value;
             break;
           case "DTSTART":
-            current_event.start = convert_ical_date_to_iso(value);
+            current_event.start = convert_ical_date_to_iso_date(value);
             break;
           case "DTEND":
-            current_event.end = convert_ical_date_to_iso(value);
+            current_event.end = convert_ical_date_to_iso_date(value);
             break;
           case "LOCATION":
             current_event.location = value;
@@ -124,7 +124,7 @@ export const parse_ical = (ics: string): Maybe<HumanFriendlyCalendar> => {
             calendar.timezone = value;
             break;
           case "DTSTAMP":
-            calendar.updated = convert_ical_date_to_iso(value);
+            calendar.updated = convert_ical_date_to_iso_date(value);
             break;
           case "X-WR-CALNAME":
             calendar.name = value;
