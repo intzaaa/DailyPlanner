@@ -1,6 +1,7 @@
 import chalk, { type ChalkInstance } from "chalk";
 import { prettify_json } from "./prettify_json.ts";
 import { curry4 } from "@typed/curry";
+import process from "node:process";
 
 const log_level = ["FATAL", "ERROR", "WARN", "INFO", "DEBUG", "TRACE"] as const;
 
@@ -42,4 +43,6 @@ export const logger = curry4((
   console.log(
     color(`[${level}] [${time}] [${module}] ${message.map(p).join(" ")}`),
   );
+
+  if (level === "FATAL") process.exit(1);
 });

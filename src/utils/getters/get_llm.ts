@@ -1,5 +1,5 @@
 import { OpenAI as LLM } from "openai";
-import { Config } from "../../types/config.ts";
+import { Config } from "../../config.ts";
 import { error, Maybe, success } from "../maybe.ts";
 
 export const get_llm = (

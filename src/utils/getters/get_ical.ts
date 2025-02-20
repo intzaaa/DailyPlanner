@@ -6,7 +6,7 @@ export const get_ical = async (location: string): Promise<Maybe<string>> => {
     const url = new URL(location);
 
     try {
-      return success(await fetch(url).then((res) => res.text()));
+      return success(await fetch(url).then((res) => res.text()) as string);
     } catch (err) {
       return error(err);
     }

@@ -1,5 +1,5 @@
-import { ChatLanguage } from "../chats/languages.ts";
-import { LogLevel } from "../utils/logger.ts";
+import { ChatLanguage } from "./types/languages.ts";
+import { LogLevel } from "./utils/logger.ts";
 
 export type Config = {
   lang: ChatLanguage;

@@ -15,9 +15,9 @@
   "imports": {
     "@typed/curry": "npm:@typed/curry@^1.0.1",
     "@vercel/ncc": "npm:@vercel/ncc@^0.38.3",
+    "ramda": "https://deno.land/x/ramda@v0.27.2/mod.ts",
     "chalk": "npm:chalk@^5.4.1",
     "dayjs": "npm:dayjs@^1.11.13",
-    "dotenv": "npm:dotenv@^16.4.7",
     "ical.js": "npm:ical.js@^2.1.0",
     "openai": "npm:openai@^4.85.2",
     "zod": "npm:zod@^3.24.2",

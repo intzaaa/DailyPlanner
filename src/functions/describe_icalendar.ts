@@ -1,11 +1,11 @@
-import { get_chat } from "../utils/getter/get_chat.ts";
-import { get_ical } from "../utils/getter/get_ical.ts";
-import { error, is_error, Maybe, success } from "../utils/maybe.ts";
+import { get_chat } from "../utils/getters/get_chat.ts";
+import { get_ical } from "../utils/getters/get_ical.ts";
+import { error, Maybe, success } from "../utils/maybe.ts";
 import zh_CN from "../chats/zh-CN.ts";
 import { OpenAI as LLM } from "openai";
 
-import { ChatLanguage } from "../chats/languages.ts";
-import { Config } from "../types/config.ts";
+import { ChatLanguage } from "../types/languages.ts";
+import { Config } from "../config.ts";
 
 export const describe_icalendar = async (
   llm: LLM,
@@ -15,10 +15,10 @@ export const describe_icalendar = async (
   owner: Parameters<typeof zh_CN.describe_icalendar.request>[0],
 ): Promise<Maybe<string>> => {
   const chats = await get_chat(language);
+
   const ical = await get_ical(ical_location);
-  if (is_error(ical)) {
-    return ical;
-  }
+  console.log(ical[0]?.reason);
+  if (ical[0]) return ical;
 
   const completion = await llm.chat.completions.create({
     model,

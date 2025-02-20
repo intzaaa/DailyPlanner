@@ -1,7 +1,7 @@
-import { get_chat } from "../utils/getter/get_chat.ts";
+import { get_chat } from "../utils/getters/get_chat.ts";
 import { error, Maybe, success } from "../utils/maybe.ts";
 import zh_CN from "../chats/zh-CN.ts";
-import { Config } from "../types/config.ts";
+import { Config } from "../config.ts";
 import type { OpenAI as LLM } from "openai";
 
 export default async (

@@ -28,6 +28,8 @@ export type HumanFriendlyCalendarEvent =
   & {
     uid: string;
     title: string;
+  }
+  & Partial<{
     start: string;
     end: string;
     location: string;
@@ -36,28 +38,29 @@ export type HumanFriendlyCalendarEvent =
     organizer: string;
     attendees: string[];
     status: string;
-  }
-  & Partial<{
-    recurrence?: RecurrenceRule;
-    timezone?: string;
+    recurrence: RecurrenceRule;
+    timezone: string;
   }>;
 
 export const ZodHumanFriendlyCalendarEvent = z.object({
   uid: z.string().uuid(),
   title: z.string().min(1),
-  start: z.string().regex(ISO8601),
-  end: z.string().regex(ISO8601),
-  location: z.string(),
-  description: z.string(),
-  categories: z.array(z.string()),
-  organizer: z.string().email(),
-  attendees: z.array(z.string().email()),
-  recurrence: z.optional(ZodRecurrenceRule),
-  status: z.enum(["confirmed", "tentative", "cancelled"]),
-  timezone: z.optional(z.string()),
+
+  ...object_map((value) => z.optional(value), {
+    start: z.string().regex(ISO8601),
+    end: z.string().regex(ISO8601),
+    location: z.string(),
+    description: z.string(),
+    categories: z.array(z.string()),
+    organizer: z.string().email(),
+    attendees: z.array(z.string().email()),
+    recurrence: ZodRecurrenceRule,
+    status: z.enum(["confirmed", "tentative", "cancelled"]),
+    timezone: z.string(),
+  }),
 });
 
-export type HumanFriendlyCalendar = {
+export type HumanFriendlyCalendar = Partial<{
   version: string;
   prodid: string;
   timezone: string;
@@ -65,14 +68,16 @@ export type HumanFriendlyCalendar = {
   name: string;
   description: string;
   events: HumanFriendlyCalendarEvent[];
-};
+}>;
 
-export const ZodHumanFriendlyCalendar = z.object({
-  version: z.string(),
-  prodid: z.string(),
-  timezone: z.string(),
-  updated: z.string().regex(ISO8601),
-  name: z.string().min(1, "Calendar name cannot be empty"),
-  description: z.string(),
-  events: z.array(ZodHumanFriendlyCalendarEvent).default([]),
-});
+export const ZodHumanFriendlyCalendar = z.object(
+  object_map((value) => z.optional(value), {
+    version: z.string(),
+    prodid: z.string(),
+    timezone: z.string(),
+    updated: z.string().regex(ISO8601),
+    name: z.string().min(1, "Calendar name cannot be empty"),
+    description: z.string(),
+    events: z.array(ZodHumanFriendlyCalendarEvent).default([]),
+  }),
+);

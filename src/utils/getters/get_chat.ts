@@ -1,4 +1,4 @@
-import { ChatLanguage } from "../../chats/languages.ts";
+import { ChatLanguage } from "../../types/languages.ts";
 import type chat from "../../chats/zh-CN.ts";
 
 export const get_chat = async (lang: ChatLanguage): Promise<typeof chat> =>
