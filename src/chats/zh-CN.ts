@@ -1,17 +1,21 @@
 import { zodResponseFormat } from "openai/helpers/zod";
-import { z } from "zod";
+import {
+  HumanFriendlyCalendar,
+  ZodHumanFriendlyCalendar,
+} from "../structures/calendars.ts";
+import { ZodTasks } from "../structures/tasks.ts";
 
-const time = () => `现在的时间是：${new Date().toUTCString()}`;
+const time = () => `现在的时间是：${new Date().toUTCString()}\n`;
 
 export default {
   describe_icalendar: {
     request: (owner: string, ical: string) =>
       time() +
-      `根据以下 iCalendar 文件，尽可能地用人话以一种专业且严谨的语言风格介绍 ${owner} 的活动。` +
-      `特别需要注意的是，请不要说出类似 “好的，以下是根据您提供的 iCalendar 文件...” 这样毫无意义的废话！` +
+      `根据以下 iCalendar 文件，以专业且详细的语言风格介绍 ${owner} 的活动。` +
       "\n\n" +
       ical +
       "\n",
+    response: zodResponseFormat(ZodHumanFriendlyCalendar, "describe_icalendar"),
   },
   assign_tasks: {
     request: (owner: string, bio: string) =>
@@ -26,91 +30,21 @@ export default {
       "\n\n" +
       bio +
       "\n",
-    response: zodResponseFormat(
-      z.object({
-        core_objectives: z.array(z.string()).describe(
-          "The main objectives or ideals of the plan.",
-        ),
-        reverse_engineering: z.object({
-          ultimate_goals: z.array(
-            z.object({
-              description: z.string(),
-              timeframe: z.string(),
-              metrics: z.array(z.string()),
-            }),
-          ),
-          intermediate_goals: z.array(
-            z.object({
-              description: z.string(),
-              timeframe: z.string(),
-              metrics: z.array(z.string()),
-            }),
-          ),
-          immediate_goals: z.array(
-            z.object({
-              description: z.string(),
-              timeframe: z.string(),
-              metrics: z.array(z.string()),
-            }),
-          ),
-        }),
-        tasks: z.object({
-          high_priority: z.array(
-            z.object({
-              task: z.string(),
-              metrics: z.array(z.string()),
-              timeframe: z.string(),
-            }),
-          ),
-          medium_priority: z.array(
-            z.object({
-              task: z.string(),
-              metrics: z.array(z.string()),
-              timeframe: z.string(),
-            }),
-          ),
-          low_priority: z.array(
-            z.object({
-              task: z.string(),
-              metrics: z.array(z.string()),
-              timeframe: z.string(),
-            }),
-          ),
-        }),
-        action_framework: z.object({
-          daily: z.array(z.string()),
-          weekly: z.array(z.string()),
-          monthly: z.array(z.string()),
-          periodic: z.array(z.string()).optional(),
-        }),
-        review_mechanism: z.object({
-          weekly_review: z.string(),
-          monthly_review: z.string(),
-          quarterly_review: z.string(),
-        }),
-        resource_management: z.object({
-          key_focus_areas: z.array(z.string()),
-          resource_allocation: z.string(),
-          flexibility_reserve: z.string(),
-        }),
-        continuous_adjustment: z.object({
-          feedback_optimization: z.string(),
-          goal_reality_alignment: z.string(),
-          learning_and_adaption: z.string(),
-        }),
-        next_steps: z.array(z.string()),
-      }),
-      "assign_tasks",
-    ),
+    response: zodResponseFormat(ZodTasks, "assign_tasks"),
   },
   plan_future: {
-    request: (owner: string, activities: string, tasks: string) =>
+    request: (
+      owner: string,
+      activities: HumanFriendlyCalendar,
+      tasks: string,
+    ) =>
       time() +
       `你是一个面面俱到的计划家，你受 ${owner} 的雇佣为 ${owner} 计划未来的活动，帮助他高质量地完成任务。` +
       `一个好计划需具备明确目标、可行路径、弹性空间和反馈机制。` +
       `明确目标应具体且与核心诉求对齐，避免空泛或过度理想化；执行路径需拆解为阶段性任务，设置时间节点与量化指标；预留20%-30%弹性时间应对突发情况，避免机械式填满日程。` +
       `生活安排需建立动态平衡系统：将时间划分为创造、恢复、关系三类区块，每日保留固定时段处理深度工作，用生理节律匹配任务难度，高强度思考安排在认知峰值期。` +
       `每周设置缓冲日处理积压事务，每季度进行目标校准，通过记录时间流向与成果产出比调整节奏。关键是以系统思维替代碎片化管理，在坚持核心框架的同时保持迭代能力，最终形成可持续的成长闭环。` +
+      `注意！你计划的活动不能与现有的活动冲突。` +
       "\n\n" +
       activities +
       "\n\n" +
@@ -147,12 +81,12 @@ export default {
     request: (
       owner: string,
       participants: string,
-      meetingAgenda: string,
+      meeting_agenda: string,
       location: string,
     ) =>
       time() +
       `你是一个沟通协调专家，现在帮助 ${owner} 安排一次会议。` +
-      `会议议题为：${meetingAgenda}。请确保会议在 ${location} 举行，并与 ${participants} 协调时间，确保所有关键参与者能准时出席。` +
+      `会议议题为：${meeting_agenda}。请确保会议在 ${location} 举行，并与 ${participants} 协调时间，确保所有关键参与者能准时出席。` +
       "\n",
   },
 } as const satisfies Record<

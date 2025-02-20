@@ -19,6 +19,7 @@ export default async (): Promise<Maybe<string>> => {
         content: chats.describe_icalendar.request(config.info.owner, ical),
       },
     ],
+    response_format: chats.describe_icalendar.response,
   });
 
   const result = completion.choices[0]?.message.content;

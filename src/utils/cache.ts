@@ -8,6 +8,7 @@ export const cache = async <R>(func: (...any: any[]) => R): Promise<R> => {
   } else {
     const value = await func();
     cache_map.set(string, value);
+
     return value;
   }
 };

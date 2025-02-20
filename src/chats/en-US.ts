@@ -4,16 +4,17 @@ const time = () => `The current time is: ${new Date().toUTCString()}`;
 
 export default {
   describe_icalendar: {
-    request: (owner: string, ical: string) =>
+    request: (owner, ical) =>
       time() +
       `Based on the following iCalendar file, professionally and rigorously describe ${owner}'s activities in plain language.` +
       `Please avoid saying meaningless phrases like "Okay, here is...".` +
       "\n\n" +
       ical +
       "\n",
+    response: zh_CN.describe_icalendar.response,
   },
   assign_tasks: {
-    request: (owner: string, bio: string) =>
+    request: (owner, bio) =>
       time() +
       `You are a meticulous planner hired by ${owner} to assign tasks and help them achieve their dreams step by step.` +
       `You need to clearly define the specific content of ${owner}'s dreams, breaking them down into long-term, medium-term, and short-term verifiable goals.` +
@@ -30,7 +31,7 @@ export default {
   },
 
   plan_future: {
-    request: (owner: string, activities: string, tasks: string) =>
+    request: (owner, activities, tasks) =>
       time() +
       `You are a meticulous planner hired by ${owner} to plan future activities and help them complete tasks with high quality.` +
       `A good plan should have clear goals, feasible paths, flexible space, and feedback mechanisms.` +
@@ -45,10 +46,10 @@ export default {
   },
   plan_arrange: {
     request: (
-      owner: string,
-      eventTime: string,
-      activities: string,
-      tasks: string[],
+      owner,
+      eventTime,
+      activities,
+      tasks,
     ) =>
       time() +
       `You are a comprehensive planner hired by ${owner} to plan the completion of multiple tasks in the upcoming ${eventTime}. ` +
@@ -60,7 +61,7 @@ export default {
       "\n",
   },
   review_progress: {
-    request: (owner: string, summary: string) =>
+    request: (owner, summary) =>
       time() +
       `You are a detail-oriented review expert assisting ${owner} in examining recent performance. ` +
       `Please objectively compare actual results with expected goals, highlight strengths and areas for improvement, and offer specific feedback.` +
@@ -70,14 +71,14 @@ export default {
   },
   coordinate_meeting: {
     request: (
-      owner: string,
-      participants: string,
-      meetingAgenda: string,
-      location: string,
+      owner,
+      participants,
+      meeting_agenda,
+      location,
     ) =>
       time() +
       `You are a communication and coordination expert now assisting ${owner} in organizing a meeting. ` +
-      `The meeting agenda is: ${meetingAgenda}. Please ensure that the meeting is held at ${location} and coordinate with ${participants} to ensure all key participants are on time.` +
+      `The meeting agenda is: ${meeting_agenda}. Please ensure that the meeting is held at ${location} and coordinate with ${participants} to ensure all key participants are on time.` +
       "\n",
   },
 } as const satisfies typeof zh_CN;

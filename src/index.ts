@@ -3,6 +3,8 @@ import { OpenAI as LLM } from "openai";
 import { deep_check } from "./utils/deep_check.ts";
 import { logger, LogLevel } from "./utils/logger.ts";
 import process from "node:process";
+import describe_icalendar from "./functions/describe_icalendar.ts";
+import assign_tasks from "./functions/assign_tasks.ts";
 
 export const dirname: string = import.meta.dirname!;
 
@@ -22,13 +24,13 @@ export const config = {
     "INFO") satisfies LogLevel,
 } as const;
 
-const log = await logger("index", config.log_level);
+const l = await logger("index", config.log_level);
 
 {
   const check = deep_check(config);
 
   if (check.false.length) {
-    log("FATAL", `The following values are missing:\n${check.false.join(" ")}`);
+    l("FATAL", `The following values are missing:\n${check.false.join(" ")}`);
     process.exit(1);
   }
 }
@@ -38,4 +40,7 @@ export const llm = new LLM({
   apiKey: config.llm.api_key,
 });
 
-log("INFO", `Successfully loaded configuration:`, config);
+l("INFO", `Successfully loaded configuration:`, config);
+
+await describe_icalendar();
+await assign_tasks();
