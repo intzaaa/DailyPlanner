@@ -5,7 +5,7 @@ import zh_CN from "../chats/zh-CN.ts";
 import { OpenAI as LLM } from "openai";
 
 import { ChatLanguage } from "../types/languages.ts";
-import { Config } from "../config.ts";
+import { Config } from "../types/config.ts";
 
 export const describe_icalendar = async (
   llm: LLM,

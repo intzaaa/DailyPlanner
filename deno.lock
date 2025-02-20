@@ -8,7 +8,7 @@
     "npm:chalk@^5.4.1": "5.4.1",
     "npm:dayjs@^1.11.13": "1.11.13",
     "npm:ical.js@^2.1.0": "2.1.0",
-    "npm:openai@^4.85.2": "4.85.2_zod@3.24.2",
+    "npm:openai@^4.85.3": "4.85.3_zod@3.24.2",
     "npm:zod@^3.24.2": "3.24.2"
   },
   "npm": {
@@ -207,8 +207,8 @@
         "whatwg-url"
       ]
     },
-    "openai@4.85.2_zod@3.24.2": {
-      "integrity": "sha512-ZQg3Q+K4A6M9dLFh5W36paZkZBQO+VbxMNJ1gUSyHsGiEWuXahdn02ermqNV68LhWQxdJQaWUFRAYpW/suTPWQ==",
+    "openai@4.85.3_zod@3.24.2": {
+      "integrity": "sha512-KTMXAK6FPd2IvsPtglMt0J1GyVrjMxCYzu/mVbCPabzzquSJoZlYpHtE0p0ScZPyt11XTc757xSO4j39j5g+Xw==",
       "dependencies": [
         "@types/node@18.19.76",
         "@types/node-fetch",
@@ -595,7 +595,7 @@
       "npm:chalk@^5.4.1",
       "npm:dayjs@^1.11.13",
       "npm:ical.js@^2.1.0",
-      "npm:openai@^4.85.2",
+      "npm:openai@^4.85.3",
       "npm:zod@^3.24.2"
     ]
   }

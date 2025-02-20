@@ -1,8 +1,7 @@
-import { Config } from "./config.ts";
+import { Config } from "./types/config.ts";
+import { Exports } from "./types/exports.ts";
 import { Maybe, success } from "./utils/maybe.ts";
 
-export const setup = async (config: Config): Promise<Maybe<void>> => {
-  // const llm = get_llm(database.llm.base_url, database.llm.api_key);
-
-  return success(undefined);
+export const setup = async (config: Config): Promise<Maybe<Exports>> => {
+  return success({});
 };

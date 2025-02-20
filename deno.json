@@ -19,7 +19,7 @@
     "chalk": "npm:chalk@^5.4.1",
     "dayjs": "npm:dayjs@^1.11.13",
     "ical.js": "npm:ical.js@^2.1.0",
-    "openai": "npm:openai@^4.85.2",
+    "openai": "npm:openai@^4.85.3",
     "zod": "npm:zod@^3.24.2",
     "@types/node": "npm:@types/node@^22.13.4"
   },
