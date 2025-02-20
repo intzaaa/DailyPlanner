@@ -5,4 +5,4 @@ const base =
       ? fallback
       : String.raw({ raw: strings }, ...values);
 export const n = base(undefined);
-export const e = base("" as const);
+export const e = base("");

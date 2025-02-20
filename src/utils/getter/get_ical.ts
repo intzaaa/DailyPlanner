@@ -11,6 +11,10 @@ export const get_ical = async (location: string): Promise<Maybe<string>> => {
       return error(err);
     }
   } catch (_) {
-    return success((await readFile(location)).toString());
+    try {
+      return success((await readFile(location)).toString());
+    } catch (err) {
+      return error(err);
+    }
   }
 };

@@ -6,17 +6,25 @@ const Error:
 
 export type Error = typeof Error;
 
-export type Maybe<T> = [Error, undefined] | [undefined, T];
+export type MaybeError = [Error, undefined];
+export type MaybeSuccess<Success> = [undefined, Success];
 
-export const success = <T>(value: T): Maybe<T> => [undefined, value];
+export type Maybe<Success> = MaybeError | MaybeSuccess<Success>;
 
-export const error = <T>(description?: any): Maybe<T> => {
+export type IsError<T> = T extends MaybeError ? true : false;
+export type IsSuccess<T> = T extends MaybeSuccess<T> ? true : false;
+
+export const success = <T>(
+  value?: T,
+): MaybeSuccess<T> => [undefined, value as any];
+
+export const error = (description?: any): MaybeError => {
   Error.reason = description === undefined ? description : String(description);
   return [Error, undefined];
 };
 
-export const is_success = <T>(value: Maybe<T>): value is [undefined, T] =>
-  value[1] !== undefined;
+export const is_error = <T extends Maybe<any>>(value: T): IsError<T> =>
+  (value[0] === Error) as any;
 
-export const is_error = <T>(value: Maybe<T>): value is [Error, undefined] =>
-  value[0] === Error;
+export const is_success = <T>(value: Maybe<T>): IsSuccess<T> =>
+  !is_error(value) as any;
