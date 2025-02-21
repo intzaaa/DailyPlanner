@@ -92,6 +92,28 @@ export interface NLPAPI {
     sentimentAnalysis(input: string): Promise<number>;
 }
 
+
+
+export interface LoggingAPI {
+    logInfo(message: string): Promise<void>;
+    logWarning(message: string): Promise<void>;
+    logError(message: string): Promise<void>;
+}
+
+export interface AnalyticsAPI {
+    trackEvent(eventName: string, properties?: Record<string, any>): Promise<void>;
+    getUsageMetrics(): Promise<Record<string, any>>;
+}
+
+export interface StorageAPI {
+    upload(file: File, path: string): Promise<string>;
+    download(path: string): Promise<File>;
+    delete(path: string): Promise<void>;
+    list(path: string): Promise<ReadonlyArray<string>>;
+}
+
+
+
 export interface Exports {
     user: UserAPI;
     subscription: SubscriptionAPI;
@@ -101,4 +123,7 @@ export interface Exports {
     interaction: InteractionAPI;
     notification: NotificationAPI;
     nlp: NLPAPI;
+    logging: LoggingAPI;
+    analytics: AnalyticsAPI;
+    storage: StorageAPI;
 }
