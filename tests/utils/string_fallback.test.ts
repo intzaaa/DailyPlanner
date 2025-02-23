@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.194.0/testing/asserts.ts";
-import { n, e } from "../../src/utils/string_fallback.ts";
+import { e, n } from "../../src/utils/string_fallback.ts";
 
 Deno.test("string_fallback - undefined fallback", () => {
   assertEquals(n`Hello, ${undefined}!`, undefined);

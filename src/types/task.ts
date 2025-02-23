@@ -1,30 +1,50 @@
 import { z } from "zod";
 
-export type Task = {
+export type Task<
+  P extends "yearly" | "quarterly" | "monthly" | "weekly" | "daily" = any,
+> = {
   summary: string;
   description: string;
-  deadline: string; // ISO 8601
-  status: "pending" | "in_progress" | "completed";
+  period: P;
+  priorities: {
+    urgent: boolean;
+    important: boolean;
+  };
+  deadline:
+    & {
+      year: number;
+    }
+    & (
+      P extends "quarterly" | "monthly" | "weekly" ? {
+          month: number;
+        }
+        : void
+    )
+    & (
+      P extends "daily" | "weekly" ? {
+          day: number;
+        }
+        : void
+    );
 };
 
 export const ZodTask = z.object({
   summary: z.string().min(1, "Summary required"),
   description: z.string(),
-  deadline: z.string().regex(
-    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/,
-    "Invalid datetime",
-  ),
-  status: z.enum(["pending", "in_progress", "completed"]),
+  period: z.enum(["yearly", "quarterly", "monthly", "weekly", "daily"]),
+  priorities: z.object({
+    urgent: z.boolean(),
+    important: z.boolean(),
+  }),
+  deadline: z.object({
+    year: z.number(),
+    month: z.number().optional().describe(
+      "If period is quarterly, monthly or weekly",
+    ),
+    day: z.number().optional().describe("If period is daily or weekly"),
+  }),
 });
 
-export type Tasks = {
-  short_term: Task[];
-  middle_term: Task[];
-  long_term: Task[];
-};
+export type Tasks = Task[];
 
-export const ZodTasks = z.object({
-  short_term: z.array(ZodTask).default([]),
-  middle_term: z.array(ZodTask).default([]),
-  long_term: z.array(ZodTask).default([]),
-});
+export const ZodTasks = z.array(ZodTask);

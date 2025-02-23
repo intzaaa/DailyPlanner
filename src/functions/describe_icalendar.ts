@@ -1,6 +1,6 @@
 import { get_chat } from "../utils/getters/get_chat.ts";
 import { get_ical } from "../utils/getters/get_ical.ts";
-import { error, Maybe, success } from "../utils/maybe.ts";
+import { fail, Maybe, succeed } from "@intzaaa/maybe";
 import zh_CN from "../chats/zh-CN.ts";
 import { OpenAI as LLM } from "openai";
 
@@ -17,7 +17,7 @@ export const describe_icalendar = async (
   const chats = await get_chat(language);
 
   const ical = await get_ical(ical_location);
-  console.log(ical[0]?.reason);
+  console.log(ical[0]?.description);
   if (ical[0]) return ical;
 
   const completion = await llm.chat.completions.create({
@@ -33,7 +33,7 @@ export const describe_icalendar = async (
 
   const result = completion.choices[0]?.message.content;
 
-  if (!result) return error("Failed to generate response.");
+  if (!result) return fail("Failed to generate response.");
 
-  return success(result);
+  return succeed(result);
 };

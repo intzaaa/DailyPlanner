@@ -2,7 +2,7 @@ import {
   HumanFriendlyCalendar,
   HumanFriendlyCalendarEvent,
 } from "../types/calendar.ts";
-import { error, Maybe, success } from "../utils/maybe.ts";
+import { fail, Maybe, succeed } from "@intzaaa/maybe";
 import { convert_ical_date_to_iso_date, parse_rrule } from "./utils.ts";
 
 /**
@@ -138,7 +138,7 @@ export const parse_ical = (ics: string): Maybe<HumanFriendlyCalendar> => {
       }
     });
 
-    return success({
+    return succeed({
       version: calendar.version ?? "2.0",
       prodid: calendar.prodid ?? "",
       timezone: calendar.timezone ?? "",
@@ -148,6 +148,6 @@ export const parse_ical = (ics: string): Maybe<HumanFriendlyCalendar> => {
       events: events,
     });
   } catch (err) {
-    return error(err);
+    return fail(err);
   }
 };

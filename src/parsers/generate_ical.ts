@@ -1,5 +1,5 @@
 import { HumanFriendlyCalendar } from "../types/calendar.ts";
-import { error, Maybe, success } from "../utils/maybe.ts";
+import { fail, Maybe, succeed } from "@intzaaa/maybe";
 import { convert_iso_date_to_ical_date, serialize_rrule } from "./utils.ts";
 
 export const generate_ical = (
@@ -47,8 +47,8 @@ export const generate_ical = (
     });
 
     lines.push("END:VCALENDAR");
-    return success(lines.join("\r\n"));
+    return succeed(lines.join("\r\n"));
   } catch (err) {
-    return error(err);
+    return fail(err);
   }
 };
